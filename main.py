@@ -1,7 +1,14 @@
 def on_button_pressed_a():
     global test
     basic.show_string("Yum ")
-    if test == 5:
+    if test > 3:
+        basic.show_leds("""
+            . . . . .
+                        . . . . .
+                        . . . . .
+                        . . . . .
+                        . . . . .
+        """)
         basic.show_icon(IconNames.SKULL)
         basic.show_string("No more food ")
         soundExpression.sad.play_until_done()
@@ -10,9 +17,17 @@ def on_button_pressed_a():
     test += 1
 input.on_button_pressed(Button.A, on_button_pressed_a)
 
+def on_gesture_free_fall():
+    basic.show_icon(IconNames.NO)
+    music.start_melody(music.built_in_melody(Melodies.DADADADUM),
+        MelodyOptions.ONCE)
+input.on_gesture(Gesture.FREE_FALL, on_gesture_free_fall)
+
+def upDate(text: str):
+    pass
+
 def on_sound_loud():
-    input.set_sound_threshold(SoundThreshold.LOUD, 84)
-    basic.show_string("I'm scared!!")
+    basic.show_string("I'm Scared!!")
     basic.show_icon(IconNames.SAD)
     basic.pause(100)
     for index in range(4):
@@ -48,6 +63,7 @@ def on_sound_loud():
                         # . . . #
         """)
         basic.pause(100)
+    basic.show_icon(IconNames.ASLEEP)
 input.on_sound(DetectedSound.LOUD, on_sound_loud)
 
 def on_button_pressed_b():
@@ -103,23 +119,94 @@ def my_function():
     """)
     basic.pause(100)
     basic.show_icon(IconNames.GHOST)
+    basic.pause(200)
+    basic.show_leds("""
+        . . . . .
+                . . . . .
+                . . . . .
+                . . . . .
+                . . . . .
+    """)
+    basic.pause(200)
+    basic.show_icon(IconNames.ASLEEP)
 buttonClicks.on_button_held(buttonClicks.AorB.A, my_function)
 
-Light_level = 0
 test = 0
 basic.show_icon(IconNames.ASLEEP)
 test = 0
-
-def on_forever():
-    pass
-basic.forever(on_forever)
+input.set_sound_threshold(SoundThreshold.LOUD, 212)
+basic.show_string("" + str((test)))
 
 def on_every_interval():
-    basic.show_string("" + str((input.temperature())))
+    basic.show_leds("""
+        . . . . .
+                . . . . .
+                . . . . .
+                . . . . .
+                . . . . .
+    """)
+    for index4 in range(4):
+        basic.show_leds("""
+            . . . . .
+                        # # . # #
+                        . . . . .
+                        . # # # .
+                        . . . . .
+        """)
+        basic.pause(500)
+        basic.show_leds("""
+            . . . . .
+                        # # . # #
+                        . . . . .
+                        . # # # .
+                        . . . . .
+        """)
+        basic.pause(200)
+        basic.show_leds("""
+            . . . . .
+                        # . # . .
+                        . . . . .
+                        # . . . #
+                        . # # # .
+        """)
+        basic.pause(200)
+        basic.show_leds("""
+            . . . . .
+                        . # . # .
+                        . . . . .
+                        # . . . #
+                        . # # # .
+        """)
+        basic.show_leds("""
+            . . . . .
+                        . . # . #
+                        . . . . .
+                        # . . . #
+                        . # # # .
+        """)
+        basic.pause(200)
+        basic.show_leds("""
+            . . . . .
+                        . # . # .
+                        . . . . .
+                        # . . . #
+                        . # # # .
+        """)
+        basic.pause(200)
+        basic.show_leds("""
+            . . . . .
+                        . . . . .
+                        . . . . .
+                        # . . . #
+                        . # # # .
+        """)
+        basic.pause(200)
+        basic.show_leds("""
+            . . . . .
+                        . # . # .
+                        . . . . .
+                        # . . . #
+                        . # # # .
+        """)
+        basic.pause(500)
 loops.every_interval(3600000, on_every_interval)
-
-def on_every_interval2():
-    global Light_level
-    basic.show_string("" + str((input.light_level())))
-    Light_level = input.light_level()
-loops.every_interval(3600000, on_every_interval2)
